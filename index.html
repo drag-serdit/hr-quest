@@ -1,177 +1,71 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HR-Квест: Путь к офферу</title>
-    <script src="https://telegram.org"></script>
-    <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
-            background-color: #ffffff;
-            color: #222222;
-            margin: 0;
-            padding: 20px;
-        }
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background-color: #e0e0e0;
-            border-radius: 4px;
-            margin-bottom: 20px;
-            overflow: hidden;
-        }
-        .progress-fill {
-            height: 100%;
-            background-color: #2481cc;
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-        .card {
-            background-color: #f4f4f5;
-            padding: 18px;
-            border-radius: 14px;
-            margin-bottom: 20px;
-        }
-        h2 { margin-top: 0; font-size: 19px; }
-        p { line-height: 1.5; font-size: 15px; margin-bottom: 0; }
-        .btn {
-            display: block;
-            width: 100%;
-            padding: 14px;
-            margin-bottom: 12px;
-            border: none;
-            border-radius: 12px;
-            background-color: #2481cc;
-            color: #ffffff;
-            font-size: 15px;
-            text-align: left;
-            cursor: pointer;
-            line-height: 1.4;
-        }
-        .error-box {
-            background-color: #ffebee;
-            color: #c62828;
-            padding: 16px;
-            border-radius: 12px;
-            margin-bottom: 16px;
-            font-size: 15px;
-            line-height: 1.4;
-        }
-        .success-box {
-            background-color: #e8f5e9;
-            color: #2e7d32;
-            padding: 16px;
-            border-radius: 12px;
-            margin-bottom: 16px;
-            font-size: 15px;
-            line-height: 1.4;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HR-Квест: Работа мечты</title>
+<style>
+*{box-sizing:border-box}body{font-family:sans-serif;background:#f1f5f9;color:#0f172a;margin:0;padding:16px;display:flex;justify-content:center}.box{width:100%;max-width:480px;background:#fff;border-radius:16px;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,.08)}.top{display:flex;justify-content:space-between;font-size:13px;color:#64748b;font-weight:700;margin-bottom:8px}.bar-bg{width:100%;height:8px;background:#e2e8f0;border-radius:10px;overflow:hidden;margin-bottom:20px}.bar{height:100%;background:#2563eb;width:0%;transition:.3s}.tag{display:inline-block;background:#dbeafe;color:#1e40af;font-size:12px;font-weight:700;padding:4px 10px;border-radius:6px;margin-bottom:10px}h1{font-size:18px;margin:0 0 10px}p{font-size:15px;line-height:1.5;color:#334155;margin:0 0 18px}.btn{display:block;width:100%;padding:14px;margin-bottom:10px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:12px;font-size:14.5px;text-align:left;color:#1e293b;cursor:pointer;line-height:1.4}.btn:hover{background:#eff6ff;border-color:#3b82f6}.act{background:#2563eb;color:#fff;border:none;text-align:center;font-weight:700}.gold{background:#d97706;color:#fff;border:none;text-align:center;font-weight:700;font-size:16px}.err{background:#fef2f2;border-left:4px solid #dc2626;color:#991b1b;padding:16px;border-radius:12px;font-size:14.5px;line-height:1.5;margin-bottom:14px}.win{background:#fffbeb;border:2px solid #f59e0b;border-radius:14px;padding:20px;text-align:center;margin-bottom:14px}.off{background:#fff;border-radius:10px;padding:12px;margin-top:14px;text-align:left;font-size:14px;line-height:1.6}
+</style>
 </head>
 <body>
-
-    <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
-    <div id="app">Загрузка квеста...</div>
-
-    <script>
-        try {
-            if (window.Telegram && window.Telegram.WebApp) {
-                window.Telegram.WebApp.ready();
-                window.Telegram.WebApp.expand();
-            }
-        } catch (e) {}
-
-        var steps = [
-            {
-                title: "Этап 1. Выбор вакансии",
-                text: "На рынке много «вакансий-призраков» и предложений с «серой» зарплатой. Вы — выпускник вуза. На какую вакансию откликнетесь?",
-                options: [
-                    { text: "1. «Менеджер проектов. ЗП от 250 000 ₽, опыт не нужен, пишите в личку»", correct: false, error: "❌ Отказ! Огромная зарплата без опыта и связь только в мессенджере — признак мошенников или «черного» рынка труда без ТК РФ." },
-                    { text: "2. «Младший специалист. Профильное образование, Excel, оклад 60 000 ₽ + KPI»", correct: true }
-                ]
-            },
-            {
-                title: "Этап 2. ИИ-скрининг резюме",
-                text: "Из-за дефицита HR-менеджеров резюме сначала проверяют нейросети. На просмотр уходит 6 секунд. Что напишете в сопроводительном письме?",
-                options: [
-                    { text: "1. «Я коммуникабельный, стрессоустойчивый, быстро учусь. Жду звонка!»", correct: false, error: "❌ Алгоритм отсеял резюме! Шаблонные слова без фактов считаются «белым шумом». Используйте ключевые слова из вакансии." },
-                    { text: "2. «Владею Excel (ВПР, сводные таблицы), вел учебные проекты. Готов к тестовому»", correct: true }
-                ]
-            },
-            {
-                title: "Этап 3. Цифровой этикет на интервью",
-                text: "70% первых собеседований проходят по видеосвязи. Дома шумно. Ваши действия?",
-                options: [
-                    { text: "1. Зайду с телефона из кафе с чашкой кофе — покажу, что я легкий на подъем", correct: false, error: "❌ Собеседование провалено! Шум и еда в кадре нарушают деловой этикет и считываются как неуважение к компании." },
-                    { text: "2. Найду тихое место, проверю свет и камеру, надену рубашку и подготовлю блокнот", correct: true }
-                ]
-            },
-            {
-                title: "Этап 4. Токсичный найм и выгорание",
-                text: "HR спрашивает: «У нас бывают бесплатные авралы по выходным, и не планируете ли вы в декрет / переезд?»",
-                options: [
-                    { text: "1. «Готов работать 24/7 бесплатно, личной жизни у меня нет, только возьмите!»", correct: false, error: "❌ Ошибка! Согласие на бесплатные переработки ставит вас в слабую позицию и гарантирует выгорание через 3 месяца." },
-                    { text: "2. «Нацелен на результат и соблюдение дедлайнов, переработки готов обсуждать по ТК РФ»", correct: true },
-                    { text: "3. «Это незаконный вопрос, я подам на вас в трудовую инспекцию!»", correct: false, error: "❌ Отказ! Агрессия на интервью закрывает двери даже при вашей юридической правоте. Отвечайте спокойно." }
-                ]
-            },
-            {
-                title: "Этап 5. Зарплатные ожидания",
-                text: "В условиях кадрового голода компании конкурируют за толковых новичков. Руководитель спрашивает: «Сколько денег хотите?»",
-                options: [
-                    { text: "1. «Мне все равно, сколько заплатите, главное — опыт»", correct: false, error: "❌ Оффер ушел другому! Обесценивание своего труда показывает, что вы не знаете аналитику рынка и не уверены в себе." },
-                    { text: "2. «По рынку вилка 60–75 тыс. ₽. С учетом моих навыков ориентируюсь на 65 тыс. net»", correct: true }
-                ]
-            }
-        ];
-
-        var currentStep = 0;
-
-        function renderStep(errorMsg) {
-            var app = document.getElementById("app");
-            var progress = document.getElementById("progress");
-            progress.style.width = ((currentStep / steps.length) * 100) + "%";
-
-            if (errorMsg) {
-                app.innerHTML = '<div class="error-box">' + errorMsg + '</div>' +
-                    '<button class="btn" onclick="renderStep()">🔄 Попробовать этот этап снова</button>';
-                return;
-            }
-
-            if (currentStep >= steps.length) {
-                app.innerHTML = '<div class="success-box">' +
-                    '<h2>🎉 Поздравляем! Оффер ваш!</h2>' +
-                    '<p>Вы успешно обошли ловушки современного рынка труда (ИИ-фильтры, серую занятость, выгорание) и грамотно применили правила делового этикета.</p>' +
-                    '</div>' +
-                    '<button class="btn" onclick="restart()">🔁 Пройти квест заново</button>';
-                return;
-            }
-
-            var step = steps[currentStep];
-            var html = '<div class="card"><h2>' + step.title + '</h2><p>' + step.text + '</p></div>';
-            for (var i = 0; i < step.options.length; i++) {
-                html += '<button class="btn" onclick="choose(' + i + ')">' + step.options[i].text + '</button>';
-            }
-            app.innerHTML = html;
-        }
-
-        function choose(index) {
-            var option = steps[currentStep].options[index];
-            if (option.correct) {
-                currentStep++;
-                renderStep();
-            } else {
-                renderStep(option.error);
-            }
-        }
-
-        function restart() {
-            currentStep = 0;
-            renderStep();
-        }
-
-        renderStep();
-    </script>
+<div class="box">
+<div class="top"><span id="st">Этап 1 из 10</span><span id="er">Ошибок: 0</span></div>
+<div class="bar-bg"><div class="bar" id="bar"></div></div>
+<div id="app"></div>
+</div>
+<script>
+var q=[
+{g:"Проблема рынка: Вакансии-призраки",t:"1. Выбор вакансии",x:"На рынке много фейковых объявлений и серой зарплаты. Вы выпускник вуза. Куда откликнетесь?",o:[{t:"А. Менеджер проектов. ЗП от 250 000 руб., опыт не нужен, пишите в личку",ok:0,m:"Отказ! Огромная зарплата без опыта и связь в мессенджере — признак мошенников или серой занятости без ТК РФ."},{t:"Б. Младший специалист. Профильное образование, Excel, оклад 65 000 руб. + KPI",ok:1}]},
+{g:"Проблема рынка: ИИ-скрининг (ATS)",t:"2. Сопроводительное письмо",x:"Резюме сначала проверяют нейросети. На просмотр уходит 6 секунд. Что напишете в отклике?",o:[{t:"А. Я коммуникабельный, стрессоустойчивый, быстро учусь. Жду звонка!",ok:0,m:"Алгоритм отсеял резюме! Шаблонные слова без фактов считаются белым шумом. Используйте ключевые навыки из вакансии."},{t:"Б. Владею Excel (ВПР, сводные таблицы), вел учебные проекты. Готов к тестовому",ok:1}]},
+{g:"Правило интервью: Подготовка",t:"3. Изучение работодателя",x:"Вас пригласили на собеседование! До встречи остался один вечер. Как подготовитесь?",o:[{t:"А. Никак, на месте разберусь — пусть HR сам рассказывает про компанию",ok:0,m:"Провал на вопросе о компании. Неподготовленность считывается как низкая мотивация."},{t:"Б. Изучу сайт, соцсети, продукты компании и почитаю отзывы сотрудников",ok:1}]},
+{g:"Проблема рынка: Цифровой этикет",t:"4. Онлайн-собеседование",x:"70% первых интервью проходят по видеосвязи. Дома шумно. Ваши действия перед звонком?",o:[{t:"А. Зайду с телефона из кафе с чашкой кофе — покажу, что я легкий на подъем",ok:0,m:"Нарушение делового этикета! Шум и еда в кадре расцениваются как неуважение к времени компании."},{t:"Б. Найду тихое место, проверю свет и камеру, надену рубашку и возьму блокнот",ok:1}]},
+{g:"Правило интервью: Методика STAR",t:"5. Рассказ о достижениях",x:"У вас мало опыта, и рекрутер спрашивает, как вы справляетесь со сложными задачами. Как ответить?",o:[{t:"А. Опишу реальный кейс из учебы: задача, мои действия и полученный результат",ok:1},{t:"Б. Скажу: Я очень старательный, никогда не сдаюсь и делаю всё на 100%",ok:0,m:"Ошибка! Общие фразы не убеждают. Используйте метод STAR (Ситуация — Задача — Действие — Результат)."}]},
+{g:"Проблема рынка: Предвзятость к новичкам",t:"6. Вопрос об отсутствии опыта",x:"Интервьюер говорит: У вас нет коммерческого опыта. Зачем нам вас брать?",o:[{t:"А. Ну возьмите пожалуйста, я готов работать за еду, только научите!",ok:0,m:"Позиция просящего отталкивает. Работодатель ищет того, кто решит задачи, а не создаст нагрузку."},{t:"Б. У меня свежие профильные знания, нет устаревших привычек и я быстро закрою рутинные задачи",ok:1}]},
+{g:"Проблема рынка: Выгорание и токсичный найм",t:"7. Некорректные вопросы",x:"HR спрашивает: У нас бывают бесплатные авралы по выходным, и не планируете ли вы в декрет или переезд?",o:[{t:"А. Готов работать 24/7 бесплатно, личной жизни у меня нет!",ok:0,m:"Ловушка выгорания! Согласие на бесплатные переработки ставит вас в слабую позицию."},{t:"Б. Нацелен на результат и дедлайны, переработки готов обсуждать по ТК РФ",ok:1},{t:"В. Это незаконный вопрос, я подам на вас в трудовую инспекцию!",ok:0,m:"Агрессия закрывает двери даже при вашей юридической правоте. Отвечайте спокойно."}]},
+{g:"Правило интервью: Встречные вопросы",t:"8. Финал беседы",x:"В конце собеседования руководитель спрашивает: Какие у вас есть вопросы к нам?",o:[{t:"А. Вопросов нет, мне всё понятно",ok:0,m:"Ошибка! Отсутствие вопросов часто воспринимается как равнодушие к будущей работе."},{t:"Б. Какие задачи будут стоять передо мной в первые 3 месяца и как оценивается испытательный срок?",ok:1}]},
+{g:"Проблема рынка: Кадровый голод и зарплаты",t:"9. Обсуждение зарплаты",x:"Из-за дефицита кадров компании готовы платить за потенциал. На вопрос о желаемом доходе вы ответите:",o:[{t:"А. Мне все равно, сколько заплатите, главное — опыт",ok:0,m:"Обесценивание себя показывает незнание аналитики рынка труда и неуверенность."},{t:"Б. По рынку вилка 60–75 тыс. руб. С учетом навыков ориентируюсь на 65 тыс. на руки",ok:1}]},
+{g:"Проблема рынка: Гостинг",t:"10. Ожидание решения",x:"Собеседование прошло отлично, обещали ответить через 3 дня, но наступила тишина. Ваши действия?",o:[{t:"А. Напишу вежливое письмо: поблагодарю за встречу и уточню статус по вакансии",ok:1},{t:"Б. Буду звонить рекрутеру каждые 2 часа с претензиями, почему меня игнорируют",ok:0,m:"Навязчивость и давление разрушают хорошее впечатление."}]}
+];
+var s=0,e=0,h=0;
+function draw(err){
+var c=document.getElementById("app");
+document.getElementById("bar").style.width=(s/q.length*100)+"%";
+document.getElementById("er").innerText="Ошибок: "+e;
+c.innerHTML="";
+if(err){
+document.getElementById("st").innerText="Этап "+(s+1)+" из "+q.length;
+var d=document.createElement("div");d.className="err";d.innerText="❌ "+err;c.appendChild(d);
+var b=document.createElement("button");b.className="btn act";b.innerText="🔄 Попробовать снова";b.onclick=function(){draw()};c.appendChild(b);
+return;
+}
+if(s>=q.length){
+document.getElementById("st").innerText="Победа!";
+var r=e===0?"🏆 Идеальный кандидат (0 ошибок!)":e<=2?"🥈 Сильный соискатель":"🥉 Настойчивый кандидат";
+var w=document.createElement("div");w.className="win";
+w.innerHTML="<div style='font-size:48px'>🏆</div><h1 style='color:#92400e;margin-top:8px'>РАБОТА МЕЧТЫ ВАША!</h1><div style='font-weight:700;color:#78350f'>"+r+"</div><div class='off'><b>📄 Ваш оффер:</b><br>• <b>Должность:</b> Специалист мечты<br>• <b>Оформление:</b> По ТК РФ с 1-го дня<br>• <b>Зарплата:</b> Выше рынка + бонусы<br>• <b>Условия:</b> Гибкий график, ДМС</div>";
+c.appendChild(w);
+if(h){
+var m=document.createElement("div");m.style.cssText="background:#dcfce7;color:#166534;padding:12px;border-radius:10px;text-align:center;font-weight:700;margin-bottom:10px";m.innerText="✅ Оффер принят! Поздравляем!";c.appendChild(m);
+}else{
+var hb=document.createElement("button");hb.className="btn gold";hb.innerText="✍️ Принять оффер мечты";hb.onclick=function(){h=1;draw()};c.appendChild(hb);
+}
+var rb=document.createElement("button");rb.className="btn";rb.style.textAlign="center";rb.innerText="🔁 Пройти заново";rb.onclick=function(){s=0;e=0;h=0;draw()};c.appendChild(rb);
+return;
+}
+document.getElementById("st").innerText="Этап "+(s+1)+" из "+q.length;
+var it=q[s];
+var g=document.createElement("div");g.className="tag";g.innerText=it.g;c.appendChild(g);
+var t=document.createElement("h1");t.innerText=it.t;c.appendChild(t);
+var p=document.createElement("p");p.innerText=it.x;c.appendChild(p);
+it.o.forEach(function(o){
+var b=document.createElement("button");b.className="btn";b.innerText=o.t;
+b.onclick=function(){if(o.ok){s++;draw()}else{e++;draw(o.m)}};
+c.appendChild(b);
+});
+}
+draw();
+</script>
 </body>
 </html>
+
