@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR-Квест: Путь к офферу</title>
+    <script src="https://telegram.org"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--tg-theme-bg-color, #ffffff);
+            color: var(--tg-theme-text-color, #222222);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            min-height: 90vh;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: var(--tg-theme-secondary-bg-color, #e0e0e0);
+            border-radius: 4px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background-color: var(--tg-theme-button-color, #2481cc);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .card {
+            background-color: var(--tg-theme-secondary-bg-color, #f4f4f5);
+            padding: 18px;
+            border-radius: 14px;
+            margin-bottom: 20px;
+        }
+        h2 { margin-top: 0; font-size: 20px; }
+        p { line-height: 1.5; font-size: 15px; }
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 12px;
+            border: none;
+            border-radius: 12px;
+            background-color: var(--tg-theme-button-color, #2481cc);
+            color: var(--tg-theme-button-text-color, #ffffff);
+            font-size: 15px;
+            text-align: left;
+            cursor: pointer;
+            line-height: 1.4;
+        }
+        .btn:active { opacity: 0.8; }
+        .error-box {
+            background-color: #ffebee;
+            color: #c62828;
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            font-size: 15px;
+            line-height: 1.4;
+        }
+        .success-box {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            font-size: 15px;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+    <div id="app"></div>
+
+    <script>
+        const tg = window.Telegram.WebApp;
+        tg.expand(); // Разворачиваем приложение на весь экран
+
+        const steps = [
+            {
+                title: "Этап 1. Выбор вакансии",
+                text: "На рынке много «вакансий-призраков» и предложений с «серой» зарплатой. Вы — выпускник вуза. На какую вакансию откликнетесь?",
+                options: [
+                    { text: "1. «Менеджер проектов. ЗП от 250 000 ₽, опыт не нужен, пишите в личку»", correct: false, error: "❌ Отказ! Огромная зарплата без опыта и связь только в мессенджере — признак мошенников или «черного» рынка труда без ТК РФ." },
+                    { text: "2. «Младший специалист. Профильное образование, Excel, оклад 60 000 ₽ + KPI»", correct: true }
+                ]
+            },
+            {
+                title: "Этап 2. ИИ-скрининг резюме",
+                text: "Из-за дефицита HR-менеджеров резюме сначала проверяют нейросети. На просмотр уходит 6 секунд. Что напишете в сопроводительном письме?",
+                options: [
+                    { text: "1. «Я коммуникабельный, стрессоустойчивый, быстро учусь. Жду звонка!»", correct: false, error: "❌ Алгоритм отсеял резюме! Шаблонные слова без фактов считаются «белым шумом». Используйте ключевые слова из вакансии." },
+                    { text: "2. «Владею Excel (ВПР, сводные таблицы), вел учебные проекты. Готов к тестовому»", correct: true }
+                ]
+            },
+            {
+                title: "Этап 3. Цифровой этикет на интервью",
+                text: "70% первых собеседований проходят по видеосвязи. Дома шумно. Ваши действия?",
+                options: [
+                    { text: "1. Зайду с телефона из кафе с чашкой кофе — покажу, что я легкий на подъем", correct: false, error: "❌ Собеседование провалено! Шум и еда в кадре нарушают деловой этикет и считываются как неуважение к компании." },
+                    { text: "2. Найду тихое место, проверю свет и камеру, надену рубашку и подготовлю блокнот", correct: true }
+                ]
+            },
+            {
+                title: "Этап 4. Токсичный найм и выгорание",
+                text: "HR спрашивает: «У нас бывают бесплатные авралы по выходным, и не планируете ли вы в декрет / переезд?»",
+                options: [
+                    { text: "1. «Готов работать 24/7 бесплатно, личной жизни у меня нет, только возьмите!»", correct: false, error: "❌ Ошибка! Согласие на бесплатные переработки ставит вас в слабую позицию и гарантирует выгорание через 3 месяца." },
+                    { text: "2. «Нацелен на результат и соблюдение дедлайнов, переработки готов обсуждать по ТК РФ»", correct: true },
+                    { text: "3. «Это незаконный вопрос, я подам на вас в трудовую инспекцию!»", correct: false, error: "❌ Отказ! Агрессия на интервью закрывает двери даже при вашей юридической правоте. Отвечайте спокойно." }
+                ]
+            },
+            {
+                title: "Этап 5. Зарплатные ожидания",
+                text: "В условиях кадрового голода компании конкурируют за толковых новичков. Руководитель спрашивает: «Сколько денег хотите?»",
+                options: [
+                    { text: "1. «Мне все равно, сколько заплатите, главное — опыт»", correct: false, error: "❌ Оффер ушел другому! Обесценивание своего труда показывает, что вы не знаете аналитику рынка и не уверены в себе." },
+                    { text: "2. «По рынку вилка 60–75 тыс. ₽. С учетом навыков ориентируюсь на 65 тыс. net»", correct: true }
+                ]
+            }
+        ];
+
+        let currentStep = 0;
+
+        function renderStep(errorMsg = null) {
+            const app = document.getElementById("app");
+            const progress = document.getElementById("progress");
+            progress.style.width = `${(currentStep / steps.length) * 100}%`;
+
+            if (errorMsg) {
+                if (tg.HapticFeedback) tg.HapticFeedback.notificationOccurred('error');
+                app.innerHTML = `
+                    <div class="error-box">${errorMsg}</div>
+                    <button class="btn" onclick="renderStep()">🔄 Попробовать этот этап снова</button>
+                `;
+                return;
+            }
+
+            if (currentStep >= steps.length) {
+                if (tg.HapticFeedback) tg.HapticFeedback.notificationOccurred('success');
+                app.innerHTML = `
+                    <div class="success-box">
+                        <h2>🎉 Поздравляем! Оффер ваш!</h2>
+                        <p>Вы успешно обошли ловушки современного рынка труда (ИИ-фильтры, серую занятость, выгорание) и грамотно применили правила делового этикета.</p>
+                    </div>
+                    <button class="btn" onclick="restart()">🔁 Пройти квест заново</button>
+                `;
+                return;
+            }
+
+            const step = steps[currentStep];
+            let html = `<div class="card"><h2>${step.title}</h2><p>${step.text}</p></div>`;
+            step.options.forEach((opt, idx) => {
+                html += `<button class="btn" onclick="choose(${idx})">${opt.text}</button>`;
+            });
+            app.innerHTML = html;
+        }
+
+        function choose(index) {
+            const option = steps[currentStep].options[index];
+            if (option.correct) {
+                if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
+                currentStep++;
+                renderStep();
+            } else {
+                renderStep(option.error);
+            }
+        }
+
+        function restart() {
+            currentStep = 0;
+            renderStep();
+        }
+
+        renderStep();
+    </script>
+</body>
+</html>
