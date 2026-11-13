@@ -1,71 +1,27 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>HR-Квест: Работа мечты</title>
+<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>HR-Квест</title>
 <style>
-*{box-sizing:border-box}body{font-family:sans-serif;background:#f1f5f9;color:#0f172a;margin:0;padding:16px;display:flex;justify-content:center}.box{width:100%;max-width:480px;background:#fff;border-radius:16px;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,.08)}.top{display:flex;justify-content:space-between;font-size:13px;color:#64748b;font-weight:700;margin-bottom:8px}.bar-bg{width:100%;height:8px;background:#e2e8f0;border-radius:10px;overflow:hidden;margin-bottom:20px}.bar{height:100%;background:#2563eb;width:0%;transition:.3s}.tag{display:inline-block;background:#dbeafe;color:#1e40af;font-size:12px;font-weight:700;padding:4px 10px;border-radius:6px;margin-bottom:10px}h1{font-size:18px;margin:0 0 10px}p{font-size:15px;line-height:1.5;color:#334155;margin:0 0 18px}.btn{display:block;width:100%;padding:14px;margin-bottom:10px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:12px;font-size:14.5px;text-align:left;color:#1e293b;cursor:pointer;line-height:1.4}.btn:hover{background:#eff6ff;border-color:#3b82f6}.act{background:#2563eb;color:#fff;border:none;text-align:center;font-weight:700}.gold{background:#d97706;color:#fff;border:none;text-align:center;font-weight:700;font-size:16px}.err{background:#fef2f2;border-left:4px solid #dc2626;color:#991b1b;padding:16px;border-radius:12px;font-size:14.5px;line-height:1.5;margin-bottom:14px}.win{background:#fffbeb;border:2px solid #f59e0b;border-radius:14px;padding:20px;text-align:center;margin-bottom:14px}.off{background:#fff;border-radius:10px;padding:12px;margin-top:14px;text-align:left;font-size:14px;line-height:1.6}
-</style>
-</head>
-<body>
-<div class="box">
-<div class="top"><span id="st">Этап 1 из 10</span><span id="er">Ошибок: 0</span></div>
-<div class="bar-bg"><div class="bar" id="bar"></div></div>
-<div id="app"></div>
-</div>
+*{box-sizing:border-box}body{font-family:sans-serif;background:#f1f5f9;color:#0f172a;margin:0;padding:16px;display:flex;justify-content:center}.box{width:100%;max-width:480px;background:#fff;border-radius:16px;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,.08)}.top{display:flex;justify-content:space-between;font-size:13px;color:#64748b;font-weight:700;margin-bottom:8px}.bar-bg{width:100%;height:8px;background:#e2e8f0;border-radius:10px;overflow:hidden;margin-bottom:20px}.bar{height:100%;background:#2563eb;width:0%;transition:.3s}.tag{display:inline-block;background:#dbeafe;color:#1e40af;font-size:12px;font-weight:700;padding:4px 10px;border-radius:6px;margin-bottom:10px}h1{font-size:18px;margin:0 0 10px}p{font-size:15px;line-height:1.5;color:#334155;margin:0 0 18px}.btn{display:block;width:100%;padding:14px;margin-bottom:10px;background:#f8fafc;border:1px solid #cbd5e1;border-radius:12px;font-size:14px;text-align:left;color:#1e293b;cursor:pointer;line-height:1.4}.btn:hover{background:#eff6ff;border-color:#3b82f6}.act{background:#2563eb;color:#fff;border:none;text-align:center;font-weight:700}.gold{background:#d97706;color:#fff;border:none;text-align:center;font-weight:700;font-size:16px}.err{background:#fef2f2;border-left:4px solid #dc2626;color:#991b1b;padding:16px;border-radius:12px;font-size:14px;line-height:1.5;margin-bottom:14px}.win{background:#fffbeb;border:2px solid #f59e0b;border-radius:14px;padding:20px;text-align:center;margin-bottom:14px}.off{background:#fff;border-radius:10px;padding:12px;margin-top:14px;text-align:left;font-size:14px;line-height:1.6}
+</style></head><body><div class="box"><div class="top"><span id="st">Этап 1 из 10</span><span id="er">Ошибок: 0</span></div><div class="bar-bg"><div class="bar" id="bar"></div></div><div id="app"></div></div>
 <script>
 var q=[
-{g:"Проблема рынка: Вакансии-призраки",t:"1. Выбор вакансии",x:"На рынке много фейковых объявлений и серой зарплаты. Вы выпускник вуза. Куда откликнетесь?",o:[{t:"А. Менеджер проектов. ЗП от 250 000 руб., опыт не нужен, пишите в личку",ok:0,m:"Отказ! Огромная зарплата без опыта и связь в мессенджере — признак мошенников или серой занятости без ТК РФ."},{t:"Б. Младший специалист. Профильное образование, Excel, оклад 65 000 руб. + KPI",ok:1}]},
-{g:"Проблема рынка: ИИ-скрининг (ATS)",t:"2. Сопроводительное письмо",x:"Резюме сначала проверяют нейросети. На просмотр уходит 6 секунд. Что напишете в отклике?",o:[{t:"А. Я коммуникабельный, стрессоустойчивый, быстро учусь. Жду звонка!",ok:0,m:"Алгоритм отсеял резюме! Шаблонные слова без фактов считаются белым шумом. Используйте ключевые навыки из вакансии."},{t:"Б. Владею Excel (ВПР, сводные таблицы), вел учебные проекты. Готов к тестовому",ok:1}]},
-{g:"Правило интервью: Подготовка",t:"3. Изучение работодателя",x:"Вас пригласили на собеседование! До встречи остался один вечер. Как подготовитесь?",o:[{t:"А. Никак, на месте разберусь — пусть HR сам рассказывает про компанию",ok:0,m:"Провал на вопросе о компании. Неподготовленность считывается как низкая мотивация."},{t:"Б. Изучу сайт, соцсети, продукты компании и почитаю отзывы сотрудников",ok:1}]},
-{g:"Проблема рынка: Цифровой этикет",t:"4. Онлайн-собеседование",x:"70% первых интервью проходят по видеосвязи. Дома шумно. Ваши действия перед звонком?",o:[{t:"А. Зайду с телефона из кафе с чашкой кофе — покажу, что я легкий на подъем",ok:0,m:"Нарушение делового этикета! Шум и еда в кадре расцениваются как неуважение к времени компании."},{t:"Б. Найду тихое место, проверю свет и камеру, надену рубашку и возьму блокнот",ok:1}]},
-{g:"Правило интервью: Методика STAR",t:"5. Рассказ о достижениях",x:"У вас мало опыта, и рекрутер спрашивает, как вы справляетесь со сложными задачами. Как ответить?",o:[{t:"А. Опишу реальный кейс из учебы: задача, мои действия и полученный результат",ok:1},{t:"Б. Скажу: Я очень старательный, никогда не сдаюсь и делаю всё на 100%",ok:0,m:"Ошибка! Общие фразы не убеждают. Используйте метод STAR (Ситуация — Задача — Действие — Результат)."}]},
-{g:"Проблема рынка: Предвзятость к новичкам",t:"6. Вопрос об отсутствии опыта",x:"Интервьюер говорит: У вас нет коммерческого опыта. Зачем нам вас брать?",o:[{t:"А. Ну возьмите пожалуйста, я готов работать за еду, только научите!",ok:0,m:"Позиция просящего отталкивает. Работодатель ищет того, кто решит задачи, а не создаст нагрузку."},{t:"Б. У меня свежие профильные знания, нет устаревших привычек и я быстро закрою рутинные задачи",ok:1}]},
-{g:"Проблема рынка: Выгорание и токсичный найм",t:"7. Некорректные вопросы",x:"HR спрашивает: У нас бывают бесплатные авралы по выходным, и не планируете ли вы в декрет или переезд?",o:[{t:"А. Готов работать 24/7 бесплатно, личной жизни у меня нет!",ok:0,m:"Ловушка выгорания! Согласие на бесплатные переработки ставит вас в слабую позицию."},{t:"Б. Нацелен на результат и дедлайны, переработки готов обсуждать по ТК РФ",ok:1},{t:"В. Это незаконный вопрос, я подам на вас в трудовую инспекцию!",ok:0,m:"Агрессия закрывает двери даже при вашей юридической правоте. Отвечайте спокойно."}]},
-{g:"Правило интервью: Встречные вопросы",t:"8. Финал беседы",x:"В конце собеседования руководитель спрашивает: Какие у вас есть вопросы к нам?",o:[{t:"А. Вопросов нет, мне всё понятно",ok:0,m:"Ошибка! Отсутствие вопросов часто воспринимается как равнодушие к будущей работе."},{t:"Б. Какие задачи будут стоять передо мной в первые 3 месяца и как оценивается испытательный срок?",ok:1}]},
-{g:"Проблема рынка: Кадровый голод и зарплаты",t:"9. Обсуждение зарплаты",x:"Из-за дефицита кадров компании готовы платить за потенциал. На вопрос о желаемом доходе вы ответите:",o:[{t:"А. Мне все равно, сколько заплатите, главное — опыт",ok:0,m:"Обесценивание себя показывает незнание аналитики рынка труда и неуверенность."},{t:"Б. По рынку вилка 60–75 тыс. руб. С учетом навыков ориентируюсь на 65 тыс. на руки",ok:1}]},
-{g:"Проблема рынка: Гостинг",t:"10. Ожидание решения",x:"Собеседование прошло отлично, обещали ответить через 3 дня, но наступила тишина. Ваши действия?",o:[{t:"А. Напишу вежливое письмо: поблагодарю за встречу и уточню статус по вакансии",ok:1},{t:"Б. Буду звонить рекрутеру каждые 2 часа с претензиями, почему меня игнорируют",ok:0,m:"Навязчивость и давление разрушают хорошее впечатление."}]}
-];
+{g:"Ловушка 1: Скрытые риски",t:"1. Анализ условий найма",x:"Обещают: оклад 30 000 руб. по ТК + премия 90 000 руб. в конверте. Ваши действия?",o:[{t:"А. Соглашусь, на руки выходит 120 000 руб. — выше рынка",ok:0,m:"Ловушка серой схемы! Премию могут не выплатить, а отпускные считают только от 30 000 руб."},{t:"Б. Откажусь и продолжу искать полностью белое оформление",ok:1},{t:"В. Попрошу расписку о размере премии",ok:0,m:"Расписка о серой зарплате не имеет силы в суде."}]},
+{g:"Ловушка 2: ИИ-скрининг (ATS)",t:"2. Оформление резюме",x:"Чтобы выделиться, вы сделали резюме в виде инфографики с картинками и колонками. В чем подвох?",o:[{t:"А. Отлично! Рекрутер сразу увидит креатив",ok:0,m:"Ловушка роботов ATS! Они не читают текст с картинок — резюме улетит в корзину."},{t:"Б. Сделаю текстовое резюме по шаблону портала, а портфолио дам ссылкой",ok:1},{t:"В. Вставлю скриншоты дипломов вместо текста",ok:0,m:"Алгоритмы не индексируют текст на изображениях."}]},
+{g:"Ловушка 3: Слабые стороны",t:"3. Проверка на искренность",x:"Вопрос HR: Назовите вашу слабую сторону. Какой ответ НЕ сработает?",o:[{t:"А. Я перфекционист, слишком много работаю",ok:0,m:"Ловушка шаблона! HR слышит это постоянно и считает уходом от ответа."},{t:"Б. Увлекаюсь деталями при анализе, поэтому ставлю таймер на этапы",ok:1},{t:"В. У меня нет слабых сторон",ok:0,m:"Отсутствие самокритики говорит о низкой осознанности."}]},
+{g:"Ловушка 4: Причина ухода",t:"4. Лояльность",x:"Почему ушли с прошлой практики? На самом деле руководитель кричал и срывал сроки. Что скажете?",o:[{t:"А. Честно расскажу, что руководитель был токсичным",ok:0,m:"Ловушка критики! HR подумает, что скоро вы так же отзоветесь об их компании."},{t:"Б. Получил базовый опыт, хочу расти в системной команде с четкими KPI",ok:1},{t:"В. Стало скучно, захотелось нового",ok:0,m:"Сигнал рекрутеру, что вы быстро теряете интерес."}]},
+{g:"Ловушка 5: Планы на 5 лет",t:"5. Проверка мотивации",x:"HR спрашивает: Кем видите себя через 5 лет? Вы хотите быстро стать начальником. Как ответить?",o:[{t:"А. Через 2 года займу место начальника этого отдела",ok:0,m:"Ловушка амбиций! Начальник отдела увидит в вас конкурента и откажет."},{t:"Б. Хочу стать сильным экспертом в команде и брать сложные проекты",ok:1},{t:"В. Не загадываю, рынок слишком быстро меняется",ok:0,m:"Ощущение, что компания для вас — временный вариант."}]}
+.concat([
+{g:"Ловушка 6: Стресс-интервью",t:"6. Эмоциональный интеллект",x:"Интервьюер перебивает: Судя по резюме, вы не справитесь с нашим темпом. Ваша реакция?",o:[{t:"А. Начну эмоционально доказывать, что он плохо читал резюме",ok:0,m:"Ловушка провокации! Проверяют вашу реакцию на давление."},{t:"Б. Спокойно уточню, какие задачи требуют темпа, и приведу свой кейс",ok:1},{t:"В. Молча соглашусь и опущу глаза",ok:0,m:"Пассивность подтверждает сомнения в вашей стрессоустойчивости."}]},
+{g:"Ловушка 7: Тестовое задание",t:"7. Защита труда",x:"До собеседования просят сделать стратегию на 15 слайдов за 2 дня. В чем риск?",o:[{t:"А. Выполню всё — это докажет мотивацию",ok:0,m:"Ловушка бесплатного труда! Так собирают бесплатные идеи с рынка."},{t:"Б. Предложу сделать 1-2 идеи или полное ТЗ после знакомства с руководителем",ok:1},{t:"В. Поставлю на слайды водяные знаки на весь экран",ok:0,m:"Это мешает чтению, лучше сразу согласовать объем."}]},
+{g:"Ловушка 8: Торг о зарплате",t:"8. Позиционирование",x:"В начале встречи, до рассказа о задачах, HR спрашивает: Сколько денег хотите?",o:[{t:"А. Назову минимум, чтобы точно не отсеяли",ok:0,m:"Ловушка демпинга! Рискуете получить огромный объем работы за копейки."},{t:"Б. Уточню объем задач и KPI, ориентируюсь по рынку на 65-75 тыс. руб.",ok:1},{t:"В. А сколько у вас заложено в бюджете?",ok:0,m:"Прямой возврат вопроса без своей вилки выглядит как уход от ответа."}]},
+{g:"Ловушка 9: Контроффер",t:"9. Выбор оффера",x:"Вы получили оффер, но текущее место стажировки вдруг предлагает +10% к ставке. Что говорят исследования HR?",o:[{t:"А. Останусь на старом месте — не надо адаптироваться",ok:0,m:"Ловушка контроффера! До 80% принявших его уходят в течение года, доверие уже подорвано."},{t:"Б. Поблагодарю, но приму новый оффер с лучшим ростом",ok:1},{t:"В. Начну аукцион между компаниями, требуя +30%",ok:0,m:"Агрессивный торг на старте часто ведет к отзыву обоих офферов."}]},
+{g:"Ловушка 10: Тихое выгорание",t:"10. Испытательный срок",x:"Чтобы понравиться команде, вы берете чужие задачи и сидите до 21:00. К чему это приведет?",o:[{t:"А. Через 3 месяца гарантированно повысят",ok:0,m:"Ловушка выгорания! Команда привыкнет к бесплатной помощи, а босс решит, что вы не успеваете."},{t:"Б. Сфокусируюсь на своих KPI в рабочее время и сверю приоритеты с руководителем",ok:1},{t:"В. Буду уходить ровно в 18:00 даже при горящем дедлайне",ok:0,m:"Демонстративность на испытательном сроке покажет низкую вовлеченность."}]}
+]);
 var s=0,e=0,h=0;
 function draw(err){
-var c=document.getElementById("app");
-document.getElementById("bar").style.width=(s/q.length*100)+"%";
-document.getElementById("er").innerText="Ошибок: "+e;
-c.innerHTML="";
-if(err){
-document.getElementById("st").innerText="Этап "+(s+1)+" из "+q.length;
-var d=document.createElement("div");d.className="err";d.innerText="❌ "+err;c.appendChild(d);
-var b=document.createElement("button");b.className="btn act";b.innerText="🔄 Попробовать снова";b.onclick=function(){draw()};c.appendChild(b);
-return;
-}
-if(s>=q.length){
-document.getElementById("st").innerText="Победа!";
-var r=e===0?"🏆 Идеальный кандидат (0 ошибок!)":e<=2?"🥈 Сильный соискатель":"🥉 Настойчивый кандидат";
-var w=document.createElement("div");w.className="win";
-w.innerHTML="<div style='font-size:48px'>🏆</div><h1 style='color:#92400e;margin-top:8px'>РАБОТА МЕЧТЫ ВАША!</h1><div style='font-weight:700;color:#78350f'>"+r+"</div><div class='off'><b>📄 Ваш оффер:</b><br>• <b>Должность:</b> Специалист мечты<br>• <b>Оформление:</b> По ТК РФ с 1-го дня<br>• <b>Зарплата:</b> Выше рынка + бонусы<br>• <b>Условия:</b> Гибкий график, ДМС</div>";
-c.appendChild(w);
-if(h){
-var m=document.createElement("div");m.style.cssText="background:#dcfce7;color:#166534;padding:12px;border-radius:10px;text-align:center;font-weight:700;margin-bottom:10px";m.innerText="✅ Оффер принят! Поздравляем!";c.appendChild(m);
-}else{
-var hb=document.createElement("button");hb.className="btn gold";hb.innerText="✍️ Принять оффер мечты";hb.onclick=function(){h=1;draw()};c.appendChild(hb);
-}
-var rb=document.createElement("button");rb.className="btn";rb.style.textAlign="center";rb.innerText="🔁 Пройти заново";rb.onclick=function(){s=0;e=0;h=0;draw()};c.appendChild(rb);
-return;
-}
-document.getElementById("st").innerText="Этап "+(s+1)+" из "+q.length;
-var it=q[s];
-var g=document.createElement("div");g.className="tag";g.innerText=it.g;c.appendChild(g);
-var t=document.createElement("h1");t.innerText=it.t;c.appendChild(t);
-var p=document.createElement("p");p.innerText=it.x;c.appendChild(p);
-it.o.forEach(function(o){
-var b=document.createElement("button");b.className="btn";b.innerText=o.t;
-b.onclick=function(){if(o.ok){s++;draw()}else{e++;draw(o.m)}};
-c.appendChild(b);
-});
-}
-draw();
-</script>
-</body>
-</html>
-
+var c=document.getElementById("app");document.getElementById("bar").style.width=(s/q.length*100)+"%";document.getElementById("er").innerText="Ошибок: "+e;c.innerHTML="";
+if(err){document.getElementById("st").innerText="Этап "+(s+1)+" из "+q.length;var d=document.createElement("div");d.className="err";d.innerText="❌ "+err;c.appendChild(d);var b=document.createElement("button");b.className="btn act";b.innerText="🔄 Попробовать снова";b.onclick=function(){draw()};c.appendChild(b);return;}
+if(s>=q.length){document.getElementById("st").innerText="Победа!";var r=e===0?"🏆 Эксперт HR (0 ошибок!)":e<=3?"🥈 Сильный кандидат":"🥉 Упорный соискатель";var w=document.createElement("div");w.className="win";w.innerHTML="<div style='font-size:48px'>🏆</div><h1 style='color:#92400e;margin-top:8px'>РАБОТА МЕЧТЫ ВАША!</h1><div style='font-weight:700;color:#78350f'>"+r+"</div><div class='off'><b>📄 Ваш оффер:</b><br>• <b>Должность:</b> Специалист мечты<br>• <b>Оформление:</b> Белый оклад по ТК РФ<br>• <b>Зарплата:</b> Выше рынка + KPI<br>• <b>Условия:</b> Адекватный руководитель</div>";c.appendChild(w);if(h){var m=document.createElement("div");m.style.cssText="background:#dcfce7;color:#166534;padding:12px;border-radius:10px;text-align:center;font-weight:700;margin-bottom:10px";m.innerText="✅ Оффер принят! Поздравляем!";c.appendChild(m);}else{var hb=document.createElement("button");hb.className="btn gold";hb.innerText="✍️ Принять оффер мечты";hb.onclick=function(){h=1;draw()};c.appendChild(hb);}var rb=document.createElement("button");rb.className="btn";rb.style.textAlign="center";rb.innerText="🔁 Пройти заново";rb.onclick=function(){s=0;e=0;h=0;draw()};c.appendChild(rb);return;}
+document.getElementById("st").innerText="Этап "+(s+1)+" из "+q.length;var it=q[s];var g=document.createElement("div");g.className="tag";g.innerText=it.g;c.appendChild(g);var t=document.createElement("h1");t.innerText=it.t;c.appendChild(t);var p=document.createElement("p");p.innerText=it.x;c.appendChild(p);
+it.o.forEach(function(o){var b=document.createElement("button");b.className="btn";b.innerText=o.t;b.onclick=function(){if(o.ok){s++;draw()}else{e++;draw(o.m)}};c.appendChild(b);});
+}draw();
+</script></body></html>
